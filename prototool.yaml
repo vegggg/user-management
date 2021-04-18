@@ -1,0 +1,54 @@
+protoc:
+  version: 3.11.0
+  includes:
+    # Go style
+    - /Users/macos/Documents/go/src/github.com/grpc-ecosystem/grpc-gateway
+    - /Users/macos/Documents/go/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis
+    - /Users/macos/Documents/go/src/github.com/gogo/protobuf
+    - ./proto
+lint:
+  group: uber2
+  rules:
+    add:
+      - RPCS_NO_STREAMING
+    remove:
+      - FILE_OPTIONS_REQUIRE_CSHARP_NAMESPACE
+      - FILE_OPTIONS_REQUIRE_PHP_NAMESPACE
+      - FILE_OPTIONS_REQUIRE_JAVA_PACKAGE
+      - FILE_OPTIONS_REQUIRE_JAVA_MULTIPLE_FILES
+      - FILE_OPTIONS_REQUIRE_JAVA_OUTER_CLASSNAME
+      - FILE_OPTIONS_REQUIRE_OBJC_CLASS_PREFIX
+      - FILE_OPTIONS_EQUAL_GO_PACKAGE_V2_SUFFIX
+      - SERVICES_HAVE_SENTENCE_COMMENTS
+      - RPCS_HAVE_SENTENCE_COMMENTS
+      - ENUMS_HAVE_SENTENCE_COMMENTS
+      - ENUM_FIELD_PREFIXES_EXCEPT_MESSAGE
+      - ENUM_FIELDS_HAVE_SENTENCE_COMMENTS
+      - MESSAGES_HAVE_SENTENCE_COMMENTS_EXCEPT_REQUEST_RESPONSE_TYPES
+      - MESSAGE_FIELDS_HAVE_COMMENTS
+      - MESSAGE_FIELDS_HAVE_SENTENCE_COMMENTS
+      - NAMES_NO_DATA
+      - REQUEST_RESPONSE_NAMES_MATCH_RPC
+      - REQUEST_RESPONSE_TYPES_UNIQUE
+      - REQUEST_RESPONSE_TYPES_IN_SAME_FILE
+      - SERVICE_NAMES_API_SUFFIX
+
+  # file_header:
+  #   path: ../../LICENSE
+generate:
+  go_options:
+    import_path: ./proto
+    extra_modifiers:
+      google/api/annotations.proto: google.golang.org/genproto/googleapis/api/annotations
+  plugins:
+    - name: go
+      type: go
+      flags: plugins=grpc
+      output: proto
+    - name: grpc-gateway
+      type: go
+      flags: logtostderr=true
+      output: proto
+    # - name: swagger
+    #   flags: logtostderr=true
+    #   output: ./docs

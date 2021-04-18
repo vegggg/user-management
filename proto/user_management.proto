@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package usermgnt.v1;
+
+option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger) = {
+  info: {
+    title: "API"
+    version: "1.0.0"
+  }
+  schemes: HTTPS
+  host: ""
+  consumes: "application/json"
+  produces: "application/json"
+  responses: {
+    key: "404"
+    value: {
+      description: "Returned when the resource does not exist."
+      schema: {
+        json_schema: {
+          type: STRING
+        }
+      }
+    }
+  }
+};
+option go_package = "user_mgnt/v1";
+
+import "google/api/annotations.proto";
+import "protoc-gen-swagger/options/annotations.proto";
+
+//
+// * API interfaces
+//
+service UserManagement {
+  // Get menu data
+  rpc GetUser(GetUserRequest) returns (UserProfile) {
+    option (google.api.http) = {
+      get: "/v1/users/{id}"
+    };
+  }
+  rpc CreateUser(CreateUserRequest) returns (UserProfile) {
+    option (google.api.http) = {
+      post: "/v1/users"
+      body: "user"
+    };
+  }
+}
+
+message GetUserRequest {
+  string id = 1;
+  string phone_number = 2;
+}
+
+message CreateUserRequest {
+  UserProfile user = 1;
+}
+
+message UserProfile {
+  string phone = 1;
+  string first_name = 2;
+  string last_name = 3;
+  // validate typo + db unique
+  string email = 4;
+  string country = 5;
+  string province = 6;
+  string city = 7;
+  string address_line = 8;
+  // validate
+  string postal_code = 9;
+}
