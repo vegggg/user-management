@@ -44,6 +44,18 @@ service UserManagement {
       body: "user"
     };
   }
+  rpc SendOTP(SendOTPRequest) returns () {
+    option (google.api.http) = {
+      post: "/v1/users:sendOTP"
+      body: "user"
+    };
+  };
+  rpc VerifyOTP(VerifyOTPRequest) returns (VerifyOTPResponse) {
+    option (google.api.http) = {
+      post: "/v1/users:verifyOTP"
+      body: "*"
+    };
+  }
 }
 
 message GetUserRequest {
@@ -52,7 +64,11 @@ message GetUserRequest {
 }
 
 message CreateUserRequest {
-  UserProfile user = 1;
+  // token is used to verify
+  // wether the phone number is already
+  // verfied by OTP (via SMS)
+  string token = 1;
+  UserProfile user = 2;
 }
 
 message UserProfile {
@@ -67,4 +83,18 @@ message UserProfile {
   string address_line = 8;
   // validate
   string postal_code = 9;
+}
+
+message VerifyOTPRequest {
+  string phone = 1;
+  string otp = 2;
+}
+
+message VerifyOTPResponse {
+  bool is_verified = 1;
+  string phone = 2;
+}
+
+message SendOTPRequest {
+  string phone = 1;
 }

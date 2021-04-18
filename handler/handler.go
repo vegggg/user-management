@@ -1,24 +1,16 @@
 package handler
 
 import (
-	"context"
-
-	"github.com/golang/glog"
-	user_managementpb "github.com/vegggg/user-management/proto/user_mgnt/v1"
+	sqlrepo "github.com/vegggg/user-management/user/sqlrepo"
 )
 
-type UserManagement struct{}
-
-func (u UserManagement) GetUser(ctx context.Context, in *user_managementpb.GetUserRequest) (*user_managementpb.UserProfile, error) {
-	glog.Info("[GetUser]", "user_id ", in.GetId())
-
-	return nil, nil
+type UserManagement struct {
+	sqlrepo *sqlrepo.SqlRepo
 }
-func (u UserManagement) CreateUser(ctx context.Context, in *user_managementpb.CreateUserRequest) (*user_managementpb.UserProfile, error) {
-	glog.Info("[CreateUser]", "user_id ", in.User.GetPhone())
 
-	return nil, nil
-}
-func NewUserManagement() *UserManagement {
-	return new(UserManagement)
+func NewUserManagement(sqlrepo *sqlrepo.SqlRepo) *UserManagement {
+	u := new(UserManagement)
+	u.sqlrepo = sqlrepo
+
+	return u
 }

@@ -2,7 +2,10 @@ package cmd
 
 import (
 	"context"
+	"database/sql"
 	"net/http"
+
+	_ "github.com/go-sql-driver/mysql"
 
 	rd "github.com/go-redis/redis/v8"
 	"github.com/golang/glog"
@@ -10,7 +13,7 @@ import (
 	"github.com/spf13/viper"
 	"github.com/vegggg/user-management/handler"
 	user_managementpb "github.com/vegggg/user-management/proto/user_mgnt/v1"
-	"google.golang.org/grpc"
+	"github.com/vegggg/user-management/user/sqlrepo"
 )
 
 func newRedisClient() *rd.Client {
@@ -26,38 +29,30 @@ func newRedisClient() *rd.Client {
 	return r
 }
 
-func startGrpcServer() error {
-	ctx := context.Background()
-	ctx, cancel := context.WithCancel(ctx)
-	defer cancel()
-
-	s := grpc.NewServer()
-
-	user_managementpb.RegisterUserManagementServer(s, handler.NewUserManagement())
-
-	// Register gRPC server endpoint
-	// Note: Make sure the gRPC server is running properly and accessible
-	// mux := runtime.NewServeMux()
-	// opts := []grpc.DialOption{grpc.WithInsecure()}
-	// err := user_managementpb.Re(ctx, mux, s, opts)
-	// if err != nil {
-	// 	return err
-	// }
-
-	// Start HTTP server (and proxy calls to gRPC server endpoint)
-	// return http.ListenAndServe(":8081", mux)
-
-	return nil
+func newMysqlConn(address string) (*sql.DB, error) {
+	return sql.Open("mysql", address)
 }
 
 func startHttpGateway() error {
 	mux := runtime.NewServeMux()
 	ctx := context.Background()
 
-	user_managementpb.RegisterUserManagementHandlerServer(ctx, mux, handler.NewUserManagementAPI())
+	// dependencies injection starts here
+	mysqlDB, err := newMysqlConn(viper.GetString("mysql.conn_address"))
+	if err != nil {
+		panic("connection to db failed:" + err.Error())
+	}
+
+	mr := sqlrepo.NewMysqlRepo(mysqlDB)
+
+	user_managementpb.
+		RegisterUserManagementHandlerServer(
+			ctx,
+			mux,
+			handler.NewUserManagement(mr))
 
 	s := &http.Server{
-		Addr:    ":8080",
+		Addr:    viper.GetString("service.server_address"),
 		Handler: mux,
 	}
 

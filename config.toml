@@ -1,0 +1,4 @@
+[service]
+    server_address = ":8080"
+[mysql]
+    conn_address = "root:password@tcp(127.0.0.1:3306)/oa_shop?parseTime=true&loc=Local"
