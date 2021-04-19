@@ -31,7 +31,7 @@ To Run this project on localhost try: $ docker-compose up
    A handler that implement service API interface, All it does is controlling the business flow
 
 9. otp/
-   otp service
+   otp service: use a Redis instance to maintain user's OTP and user status of "is validated by OTP"
 
 10. user/
     user service
