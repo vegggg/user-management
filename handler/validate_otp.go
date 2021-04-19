@@ -9,10 +9,13 @@ import (
 )
 
 func (u UserManagement) VerifyOTP(ctx context.Context, in *user_managementpb.VerifyOTPRequest) (*user_managementpb.VerifyOTPResponse, error) {
-	if in.GetOtp() == "123456" {
-		return &user_managementpb.VerifyOTPResponse{
-			IsVerified: true,
-		}, nil
+	err := u.otp.ValidateOTP(ctx, in.GetOtp(), in.GetPhone())
+	if err != nil {
+		return nil, status.Error(codes.InvalidArgument, "wrong OTP")
 	}
-	return nil, status.Error(codes.Aborted, "wrong OTP")
+
+	return &user_managementpb.VerifyOTPResponse{
+		IsVerified: true,
+		Phone:      in.GetPhone(),
+	}, nil
 }

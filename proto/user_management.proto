@@ -35,7 +35,7 @@ service UserManagement {
   // Get menu data
   rpc GetUser(GetUserRequest) returns (UserProfile) {
     option (google.api.http) = {
-      get: "/v1/users/{id}"
+      get: "/v1/users/{phone}"
     };
   }
   rpc CreateUser(CreateUserRequest) returns (UserProfile) {
@@ -44,12 +44,12 @@ service UserManagement {
       body: "user"
     };
   }
-  rpc SendOTP(SendOTPRequest) returns () {
+  rpc SendOTP(SendOTPRequest) returns (SendOTPResponse) {
     option (google.api.http) = {
       post: "/v1/users:sendOTP"
-      body: "user"
+      body: "*"
     };
-  };
+  }
   rpc VerifyOTP(VerifyOTPRequest) returns (VerifyOTPResponse) {
     option (google.api.http) = {
       post: "/v1/users:verifyOTP"
@@ -59,15 +59,10 @@ service UserManagement {
 }
 
 message GetUserRequest {
-  string id = 1;
-  string phone_number = 2;
+  string phone = 1;
 }
 
 message CreateUserRequest {
-  // token is used to verify
-  // wether the phone number is already
-  // verfied by OTP (via SMS)
-  string token = 1;
   UserProfile user = 2;
 }
 
@@ -97,4 +92,8 @@ message VerifyOTPResponse {
 
 message SendOTPRequest {
   string phone = 1;
+}
+
+message SendOTPResponse {
+  string otp = 1;
 }

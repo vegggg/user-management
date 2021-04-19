@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"net/http"
+	"time"
 
 	_ "github.com/go-sql-driver/mysql"
 
@@ -12,6 +13,7 @@ import (
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"github.com/spf13/viper"
 	"github.com/vegggg/user-management/handler"
+	"github.com/vegggg/user-management/otp"
 	user_managementpb "github.com/vegggg/user-management/proto/user_mgnt/v1"
 	"github.com/vegggg/user-management/user/sqlrepo"
 )
@@ -29,7 +31,8 @@ func newRedisClient() *rd.Client {
 	return r
 }
 
-func newMysqlConn(address string) (*sql.DB, error) {
+func newMysqlConn() (*sql.DB, error) {
+	address := viper.GetString("mysql.conn_address")
 	return sql.Open("mysql", address)
 }
 
@@ -38,18 +41,27 @@ func startHttpGateway() error {
 	ctx := context.Background()
 
 	// dependencies injection starts here
-	mysqlDB, err := newMysqlConn(viper.GetString("mysql.conn_address"))
+
+	// mysql
+	mysqlDB, err := newMysqlConn()
 	if err != nil {
 		panic("connection to db failed:" + err.Error())
 	}
+	// redis
+	redisConn := newRedisClient()
 
-	mr := sqlrepo.NewMysqlRepo(mysqlDB)
+	user := sqlrepo.NewMysqlRepo(mysqlDB)
+	otp := otp.NewRedisOTP(
+		redisConn,
+		5,
+		1*time.Minute,
+	)
 
 	user_managementpb.
 		RegisterUserManagementHandlerServer(
 			ctx,
 			mux,
-			handler.NewUserManagement(mr))
+			handler.NewUserManagement(user, otp))
 
 	s := &http.Server{
 		Addr:    viper.GetString("service.server_address"),

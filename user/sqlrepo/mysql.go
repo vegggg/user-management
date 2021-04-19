@@ -19,7 +19,7 @@ func (s *SqlRepo) GetUser(ctx context.Context, phone string) (*entity.UserProfil
 
 	u := new(entity.UserProfile)
 	for rows.Next() {
-		err = rows.Scan(u.Phone, &u.Phone, &u.FirstName, &u.LastName, &u.Country, &u.Province, &u.City, &u.AddressLine, &u.PostalCode)
+		err = rows.Scan(&u.Phone, &u.FirstName, &u.LastName, &u.Email, &u.Country, &u.Province, &u.City, &u.AddressLine, &u.PostalCode)
 		if err != nil {
 			return nil, err
 		}
@@ -33,8 +33,7 @@ func (s *SqlRepo) CreateUser(ctx context.Context, u *entity.UserProfile) (*entit
 
 	glog.Infoln("create user: ", u)
 	// (phone, first_name, last_name, email, country, province, city, address_line, postal_code)
-	_, err := s.db.ExecContext(ctx, stmt, &u.Phone, &u.FirstName, &u.LastName, &u.Country, &u.Province, &u.City, &u.AddressLine, &u.PostalCode)
-
+	_, err := s.db.ExecContext(ctx, stmt, u.Phone, u.FirstName, u.LastName, u.Email, u.Country, u.Province, u.City, u.AddressLine, u.PostalCode)
 	if err != nil {
 		glog.Error(err)
 		return nil, err

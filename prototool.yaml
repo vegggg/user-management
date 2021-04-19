@@ -49,6 +49,6 @@ generate:
       type: go
       flags: logtostderr=true
       output: proto
-    # - name: swagger
-    #   flags: logtostderr=true
-    #   output: ./docs
+    - name: swagger
+      flags: logtostderr=true
+      output: ./proto/swagger

@@ -1,16 +1,18 @@
 package handler
 
 import (
-	sqlrepo "github.com/vegggg/user-management/user/sqlrepo"
+	otp "github.com/vegggg/user-management/otp"
+	user "github.com/vegggg/user-management/user"
 )
 
 type UserManagement struct {
-	sqlrepo *sqlrepo.SqlRepo
+	user user.UserService
+	otp  otp.OTPService
 }
 
-func NewUserManagement(sqlrepo *sqlrepo.SqlRepo) *UserManagement {
+func NewUserManagement(user user.UserService, otp otp.OTPService) *UserManagement {
 	u := new(UserManagement)
-	u.sqlrepo = sqlrepo
-
+	u.user = user
+	u.otp = otp
 	return u
 }
