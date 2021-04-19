@@ -28,6 +28,9 @@ func newRedisClient() *rd.Client {
 		Password: pass, // no password set
 		DB:       db,   // use default DB
 	})
+	if _, err := r.Ping(context.Background()).Result(); err != nil {
+		panic("ping redis timed out")
+	}
 	return r
 }
 
@@ -80,5 +83,6 @@ func startHttpGateway() error {
 		glog.Errorf("Failed to listen and serve: %v", err)
 		return err
 	}
+	glog.Infof("Started Server")
 	return nil
 }
