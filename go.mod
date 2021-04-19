@@ -2,7 +2,7 @@ module github.com/vegggg/user-management
 
 go 1.15
 
-replace github.com/vegggg/user-management/proto-gen/user_management => /Users/macos/Documents/go-src/user-management
+// replace github.com/vegggg/user-management/proto-gen/user_management => /Users/macos/Documents/go-src/user-management
 
 require (
 	github.com/go-redis/redis/v8 v8.8.2
