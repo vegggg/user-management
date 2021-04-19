@@ -6,3 +6,6 @@
     address = "redis:6379"
     password = ""
     db = 0
+
+[test]
+    conn_address = "user:pass@tcp(127.0.0.1:3306)/user_management?parseTime=true&loc=Local"
