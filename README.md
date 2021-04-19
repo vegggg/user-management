@@ -57,3 +57,8 @@ API can be found in docs/
 
 2. Get User
    1. GET localhost:8080/v1/users/{phone}
+
+## Run test
+
+$ docker-compose up
+$ go test ./...
