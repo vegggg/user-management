@@ -1,0 +1,570 @@
+{
+	"info": {
+		"_postman_id": "9b220d8f-c725-4968-b30e-73e5bbb0924b",
+		"name": "users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "v1",
+			"item": [
+				{
+					"name": "users",
+					"item": [
+						{
+							"name": "User Management Create User",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"phone\": \"0944146504\"\n}"
+								},
+								"url": {
+									"raw": "localhost:8080/v1/users:sendOTP",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"users:sendOTP"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Returned when the resource does not exist.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"phone\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"email\": \"<string>\",\n    \"country\": \"<string>\",\n    \"province\": \"<string>\",\n    \"city\": \"<string>\",\n    \"address_line\": \"<string>\",\n    \"postal_code\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/v1/users?token=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"v1",
+												"users"
+											],
+											"query": [
+												{
+													"key": "token",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"Excepteur l\""
+								},
+								{
+									"name": "An unexpected error response.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"phone\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"email\": \"<string>\",\n    \"country\": \"<string>\",\n    \"province\": \"<string>\",\n    \"city\": \"<string>\",\n    \"address_line\": \"<string>\",\n    \"postal_code\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/v1/users?token=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"v1",
+												"users"
+											],
+											"query": [
+												{
+													"key": "token",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"error\": \"Excepteur in sed\",\n \"code\": -63816647,\n \"message\": \"magna qui adipisicing aliqua esse\",\n \"details\": [\n  {\n   \"type_url\": \"anim Duis sunt\",\n   \"value\": \"fugiat eu veniam culpa\"\n  },\n  {\n   \"type_url\": \"dolor Duis do culpa\",\n   \"value\": \"commodo dolor\"\n  }\n ]\n}"
+								},
+								{
+									"name": "A successful response.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"phone\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"email\": \"<string>\",\n    \"country\": \"<string>\",\n    \"province\": \"<string>\",\n    \"city\": \"<string>\",\n    \"address_line\": \"<string>\",\n    \"postal_code\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/v1/users?token=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"v1",
+												"users"
+											],
+											"query": [
+												{
+													"key": "token",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"phone\": \"<string>\",\n \"first_name\": \"<string>\",\n \"last_name\": \"<string>\",\n \"email\": \"<string>\",\n \"country\": \"<string>\",\n \"province\": \"<string>\",\n \"city\": \"<string>\",\n \"address_line\": \"<string>\",\n \"postal_code\": \"<string>\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Get menu data",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/v1/users/:id?phone_number=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v1",
+										"users",
+										":id"
+									],
+									"query": [
+										{
+											"key": "phone_number",
+											"value": "<string>"
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<string>",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "A successful response.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/v1/users/:id?phone_number=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"v1",
+												"users",
+												":id"
+											],
+											"query": [
+												{
+													"key": "phone_number",
+													"value": "<string>"
+												}
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"phone\": \"<string>\",\n \"first_name\": \"<string>\",\n \"last_name\": \"<string>\",\n \"email\": \"<string>\",\n \"country\": \"<string>\",\n \"province\": \"<string>\",\n \"city\": \"<string>\",\n \"address_line\": \"<string>\",\n \"postal_code\": \"<string>\"\n}"
+								},
+								{
+									"name": "An unexpected error response.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/v1/users/:id?phone_number=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"v1",
+												"users",
+												":id"
+											],
+											"query": [
+												{
+													"key": "phone_number",
+													"value": "<string>"
+												}
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"error\": \"anim enim\",\n \"code\": 91262378,\n \"message\": \"sit\",\n \"details\": [\n  {\n   \"type_url\": \"Duis dolore sed non\",\n   \"value\": \"culpa ipsum\"\n  },\n  {\n   \"type_url\": \"Lorem in ex sit\",\n   \"value\": \"ex ea\"\n  }\n ]\n}"
+								},
+								{
+									"name": "Returned when the resource does not exist.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/v1/users/:id?phone_number=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"v1",
+												"users",
+												":id"
+											],
+											"query": [
+												{
+													"key": "phone_number",
+													"value": "<string>"
+												}
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"Excepteur l\""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "User Management Send OTP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phone\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/users:sendOTP",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"users:sendOTP"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "A successful response.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"phone\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/v1/users:sendOTP",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v1",
+										"users:sendOTP"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						},
+						{
+							"name": "An unexpected error response.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"phone\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/v1/users:sendOTP",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v1",
+										"users:sendOTP"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"error\": \"anim enim\",\n \"code\": 91262378,\n \"message\": \"sit\",\n \"details\": [\n  {\n   \"type_url\": \"Duis dolore sed non\",\n   \"value\": \"culpa ipsum\"\n  },\n  {\n   \"type_url\": \"Lorem in ex sit\",\n   \"value\": \"ex ea\"\n  }\n ]\n}"
+						},
+						{
+							"name": "Returned when the resource does not exist.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"phone\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/v1/users:sendOTP",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v1",
+										"users:sendOTP"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"Excepteur l\""
+						}
+					]
+				},
+				{
+					"name": "User Management Verify OTP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phone\": \"<string>\",\n    \"otp\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/users:verifyOTP",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"users:verifyOTP"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "An unexpected error response.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"phone\": \"<string>\",\n    \"otp\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/v1/users:verifyOTP",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v1",
+										"users:verifyOTP"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"error\": \"anim enim\",\n \"code\": 91262378,\n \"message\": \"sit\",\n \"details\": [\n  {\n   \"type_url\": \"Duis dolore sed non\",\n   \"value\": \"culpa ipsum\"\n  },\n  {\n   \"type_url\": \"Lorem in ex sit\",\n   \"value\": \"ex ea\"\n  }\n ]\n}"
+						},
+						{
+							"name": "A successful response.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"phone\": \"<string>\",\n    \"otp\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/v1/users:verifyOTP",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v1",
+										"users:verifyOTP"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"is_verified\": true,\n \"phone\": \"Lorem\"\n}"
+						},
+						{
+							"name": "Returned when the resource does not exist.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"phone\": \"<string>\",\n    \"otp\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/v1/users:verifyOTP",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v1",
+										"users:verifyOTP"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"Excepteur l\""
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "/",
+			"type": "string"
+		}
+	]
+}
