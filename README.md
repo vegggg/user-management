@@ -42,6 +42,9 @@ To Run this project on localhost try: $ docker-compose up
 11. entity/
     Contains entities
 
+12. docs/
+    A postman collection json to run demo
+
 ## API flow
 
 API can be found in docs/
