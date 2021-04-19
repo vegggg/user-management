@@ -51,7 +51,7 @@ API can be found in docs/
 
 1. Create User
 
-   1. POST localhost:8080/v1/users:sendOTP body: phone
+   1. POST localhost:8080/v1/users:sendOTP body: phone Response must includes a OTP since I can NOT send a SMS
    2. POST localhost:8080/v1/users:verifyOTP body: phone + otp (otp is only valid in 1 min)
    3. POST localhost:8080/v1/users body: {UserStruct} with validated otp (also expire after 1 min since otp validation)
 
