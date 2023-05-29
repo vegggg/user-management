@@ -5,6 +5,7 @@ go 1.15
 // replace github.com/vegggg/user-management/proto-gen/user_management => /Users/macos/Documents/go-src/user-management
 
 require (
+	github.com/DATA-DOG/go-sqlmock v1.5.0 // indirect
 	github.com/go-redis/redis/v8 v8.8.2
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b
