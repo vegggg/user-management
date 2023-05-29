@@ -103,6 +103,15 @@ func Test_rangeIn(t *testing.T) {
 			0,
 			1,
 		},
+		{
+			"happy case",
+			args{
+				low: 10,
+				hi:  11,
+			},
+			0,
+			1,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
