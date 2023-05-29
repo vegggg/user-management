@@ -97,8 +97,8 @@ func Test_rangeIn(t *testing.T) {
 		{
 			"happy case",
 			args{
-				low: 0,
-				hi:  1,
+				low: 10,
+				hi:  11,
 			},
 			0,
 			1,
